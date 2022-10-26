@@ -1,0 +1,51 @@
+﻿@model IEnumerable<drugmanagementsystproject.Models.DrugInformationModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.drugid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.drugshortname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.druglongname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.allergiesmaycauseonusage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.drugid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.drugshortname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.druglongname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.allergiesmaycauseonusage)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

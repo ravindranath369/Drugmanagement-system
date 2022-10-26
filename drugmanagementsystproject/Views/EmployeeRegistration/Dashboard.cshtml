@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 15px;
+            }
+
+                .topnav a:hover {
+                    background-color: black;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: blue;
+                    color: white;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="topnav">
+        <a class="active" href="#home">My dashboard</a>
+    </div>
+    <center><h1>@User.Identity.Name</h1></center>
+    <br />
+    <button onclick="document.location ='https://localhost:44328/EmployeeRegistration/Index'" type="button" class="btn-outline-primary">Employeedetails</button>
+    <br />
+    <button onclick="document.location ='https://localhost:44328/DrugInformation/Index'" type="button" class="btn-outline-primary btn-lg">Drug information details</button>
+    <br />
+    <button onclick="document.location ='https://localhost:44328/DrugTrailHist/Index'" type="button" class="btn-outline-primary btn-lg">Drug Trails Hist details</button>
+    <br />
+    <button onclick="document.location ='https://localhost:44328/IndivisualTrailsInfo/Index'" type="button" class="btn-outline-primary btn-lg">indivisual TrailsInformation details</button>
+    <br />
+    <button onclick="document.location ='https://localhost:44328/AllergyInfo/Index'" type="button" class="btn-outline-primary btn-lg">Allergies information details</button>
+</body>
+</html>
+
+
+
+
+
+@*<p>Druginformation Module</p>
+<p>Allergicinformation Module</p>
+<p>Drugtrailinformation Module</p>
+<p>indivisual trails Module</p>
+<p>Drug trail History Module</p>*@
+
+

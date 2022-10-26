@@ -1,0 +1,66 @@
+﻿@model drugmanagementsystproject.Models.AllergicInformationModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AllergicInformationModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.allergyid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.allergyid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.allergyname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.allergyname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isdrugundertrails)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isdrugundertrails)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.anyallergyreaction)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.anyallergyreaction)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.differentsighnsandsympht)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.differentsighnsandsympht)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.antialergicmedicine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.antialergicmedicine)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
