@@ -4,11 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
+<h2 style="color:red">Index</h2>
+@if (User.IsInRole("Admin"))
+{
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -38,56 +42,78 @@
         <th>
             @Html.DisplayNameFor(model => model.username)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.confirmpassword)
-        </th>
+        @*@if (User.IsInRole("Admin"))
+        {*@
+            @*<th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.confirmpassword)
+            </th>*@
+        @*}*@
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeeid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.employeename)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.dob)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phonenumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.emailid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.department)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.designation)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.username)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.confirmpassword)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { employeeid = item.employeeid }) |
-            @Html.ActionLink("Details", "Details", new { employeeid = item.employeeid }) |
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.employeeid)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.employeename)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.dob)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.phonenumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.emailid)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.gender)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.department)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.designation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.username)
+    </td>
+    @*@if (User.IsInRole("Admin"))
+        {*@
+    @*<td>
+        @Html.DisplayFor(modelItem => item.password)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.confirmpassword)
+    </td>*@
+    @*}*@
+
+    @*@Html.HiddenFor(modelItem => item.password)
+    @Html.HiddenFor(modelItem => item.confirmpassword)*@
+    <td>
+        @if (User.IsInRole("Admin"))
+        {
+            @Html.ActionLink("Edit", "Edit", new { employeeid = item.employeeid })
+        }
+        | @Html.ActionLink("Details", "Details", new { employeeid = item.employeeid }) |
+
+        @if (User.IsInRole("Admin"))
+        {
             @Html.ActionLink("Delete", "Delete", new { employeeid = item.employeeid })
-        </td>
-    </tr>
-}
+        }
+    </td>
+</tr>
+    }
 
 </table>
+<div>
+    @Html.ActionLink("Back to dashboard", "Dashboard")
+</div>

@@ -42,7 +42,6 @@ namespace drugmanagementsystproject.dal
                 cmd.Parameters.AddWithValue("@anyallergyreaction", alleryomodel.anyallergyreaction);
                 cmd.Parameters.AddWithValue("@differentsighnsandsympht", alleryomodel.differentsighnsandsympht);
                 cmd.Parameters.AddWithValue("@antialergicmedicine", alleryomodel.antialergicmedicine);
-                cmd.Parameters.AddWithValue("@id", alleryomodel.id);
 
                 connectionManage();
                 int r = cmd.ExecuteNonQuery();
@@ -85,7 +84,7 @@ namespace drugmanagementsystproject.dal
                     differentsighnsandsympht = Convert.ToString(dr["differentsighnsandsympht"]),
                     antialergicmedicine = Convert.ToString(dr["antialergicmedicine"]),
                     Aid = Convert.ToInt32(dr["Aid"]),
-                    id = Convert.ToInt32(dr["id"])
+                    
                 }); ;
             }
             dt.Dispose();
@@ -125,7 +124,7 @@ namespace drugmanagementsystproject.dal
                 Alg.differentsighnsandsympht = Convert.ToString(dt.Rows[0]["differentsighnsandsympht"]);
                 Alg.antialergicmedicine = Convert.ToString(dt.Rows[0]["antialergicmedicine"]);
                 Alg.Aid = Convert.ToInt32(dt.Rows[0]["Aid"]);
-                Alg.id = Convert.ToInt32(dt.Rows[0]["id"]);
+                
                 dt.Dispose();
                 return Alg;
             }
@@ -136,14 +135,14 @@ namespace drugmanagementsystproject.dal
         {
             connection();
             SqlCommand cmd = new SqlCommand("UpdateAllergyDetails", con);
+            cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@allergyid", alleryomodel.allergyid);
             cmd.Parameters.AddWithValue("@allergyname", alleryomodel.allergyname);
             cmd.Parameters.AddWithValue("@isdrugundertrails", alleryomodel.isdrugundertrails);
             cmd.Parameters.AddWithValue("@anyallergyreaction", alleryomodel.anyallergyreaction);
             cmd.Parameters.AddWithValue("@differentsighnsandsympht", alleryomodel.differentsighnsandsympht);
             cmd.Parameters.AddWithValue("@antialergicmedicine", alleryomodel.antialergicmedicine);
-            cmd.Parameters.AddWithValue("@id", alleryomodel.id);
-
+            cmd.Parameters.AddWithValue("@Aid", alleryomodel.Aid);
             connectionManage();
             int i = cmd.ExecuteNonQuery();
             connectionManage();

@@ -12,22 +12,26 @@ namespace drugmanagementsystproject.Controllers
     {
         AllergicInfoDal db = new AllergicInfoDal();
         // GET: AllergyInfo
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Index()
         {
             List<AllergicInformationModel> al = db.getAllAlergies();
             return View(al);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Details(int Aid)
         {
             var model = db.getAlergyById(Aid);
             return View(model);
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Create(AllergicInformationModel Alg)
         {
             try
@@ -48,7 +52,7 @@ namespace drugmanagementsystproject.Controllers
                 return View(Alg);
             }
         }
-
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(int Aid)
         {
             AllergicInformationModel em = db.getAlergyById(Aid);
@@ -57,6 +61,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(AllergicInformationModel alm)
         {
             try
@@ -71,7 +76,7 @@ namespace drugmanagementsystproject.Controllers
                         return RedirectToAction("Details", new { Aid = alm.Aid });
                     }
                 }
-
+                
                 return View(alm);
             }
             catch (Exception e)
@@ -80,6 +85,7 @@ namespace drugmanagementsystproject.Controllers
                 return View(alm);
             }
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult delete(int Aid)
         {
             AllergicInformationModel al = db.getAlergyById(Aid);
@@ -87,6 +93,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult delete(AllergicInformationModel al)
         {
             try
@@ -96,7 +103,7 @@ namespace drugmanagementsystproject.Controllers
                     TempData["message"] = "sucessfully deleted";
                     // tempdata["message"] = "<script>alert('deleted successfully')</script>";
                 }
-                return RedirectToAction("edit");
+                return RedirectToAction("Edit");
             }
             catch
             {

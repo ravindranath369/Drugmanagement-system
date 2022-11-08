@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2 style="color:red">Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,16 +12,10 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>EmployeeRegistrationModel</h4>
+        <h4>Employee Registration</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.employeeid, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.employeeid, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.employeeid, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.HiddenFor(model => model.employeeid)
 
         <div class="form-group">
             @Html.LabelFor(model => model.employeename, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -34,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.dob, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.dob, new { htmlAttributes = new { @class = "form-control", @Value = @Model.dob.ToString("yyyy-MM-dd") } })
                 @Html.ValidationMessageFor(model => model.dob, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -104,8 +98,24 @@
         </div>
 
         <div class="form-group">
+            @Html.HiddenFor(m=>m.delete)
+        </div>
+        
+@if (!User.IsInRole("Admin"))
+{
+        <div class="form-group">
+            @Html.LabelFor(model => model.Employee, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Employee)
+                    @Html.ValidationMessageFor(model => model.Employee, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+}
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-success" />
             </div>
         </div>
     </div>

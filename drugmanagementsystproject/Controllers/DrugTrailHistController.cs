@@ -12,12 +12,14 @@ namespace drugmanagementsystproject.Controllers
     {
         DrugTrailHistoryDal db = new DrugTrailHistoryDal();
         // GET: DrugTrailHist
+        [Authorize]
         public ActionResult Index()
         {
             List<DrugTrailHistoryModel> l1 = db.getAllDrugs();
             return View(l1);
         }
 
+        [Authorize(Roles ="Admin,User")]
         public ActionResult Details(int id)
         {
             var model = db.getDrughistbyid(id);
@@ -25,6 +27,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         // GET: EmployeeRegistration/Create
+        [Authorize(Roles ="Admin,User")]
         public ActionResult Create()
         {
             return View();
@@ -32,6 +35,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: EmployeeRegistration/Create
         [HttpPost]
+        [Authorize(Roles ="Admin,User")]
         public ActionResult Create(DrugTrailHistoryModel dth)
         {
             try
@@ -54,6 +58,7 @@ namespace drugmanagementsystproject.Controllers
             }
         }
         //edit
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(int id)
         {
             DrugTrailHistoryModel em = db.getDrughistbyid(id);
@@ -62,6 +67,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: 
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(DrugTrailHistoryModel dth)
         {
             try
@@ -85,6 +91,7 @@ namespace drugmanagementsystproject.Controllers
                 return View(dth);
             }
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Delete(int id)
         {
             DrugTrailHistoryModel d = db.getDrughistbyid(id);
@@ -92,6 +99,7 @@ namespace drugmanagementsystproject.Controllers
         }
         // POST: 
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Delete(DrugTrailHistoryModel dh)
         {
             try

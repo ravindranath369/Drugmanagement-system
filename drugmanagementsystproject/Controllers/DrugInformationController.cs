@@ -12,22 +12,26 @@ namespace drugmanagementsystproject.Controllers
     {
         DrugInfoDataAxcessLayer db = new DrugInfoDataAxcessLayer();
         // GET: DrugInformation
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Index()
         {
             List<DrugInformationModel> l1 = db.getAllDrugs();
             return View(l1);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Details(int id)
         {
             var model = db.getDrugById(id);
             return View(model);
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Create()
         {
             return View();
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Create(DrugInformationModel drg)
         {
             try
@@ -48,6 +52,7 @@ namespace drugmanagementsystproject.Controllers
                 return View(drg);
             }
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(int id)
         {
             DrugInformationModel em = db.getDrugById(id);
@@ -56,6 +61,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(DrugInformationModel drg)
         {
             try
@@ -79,12 +85,14 @@ namespace drugmanagementsystproject.Controllers
                 return View(drg);
             }
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult delete(int id)
         {
             DrugInformationModel d = db.getDrugById(id);
             return View(d);
         }
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult delete(DrugInformationModel dm)
         {
             try

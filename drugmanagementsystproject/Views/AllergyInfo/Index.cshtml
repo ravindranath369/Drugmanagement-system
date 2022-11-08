@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 style="color:red">Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -53,11 +53,14 @@
             @Html.DisplayFor(modelItem => item.antialergicmedicine)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            @Html.ActionLink("Edit", "Edit", new { Aid=item.Aid }) |
+            @Html.ActionLink("Details", "Details", new { Aid=item.Aid }) |
+            @Html.ActionLink("Delete", "Delete", new { Aid=item.Aid })
         </td>
     </tr>
 }
 
 </table>
+<div>
+    @Html.ActionLink("Back to Dashboard","Dashboard","EmployeeRegistration")
+</div>

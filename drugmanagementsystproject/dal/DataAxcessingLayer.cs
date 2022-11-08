@@ -17,7 +17,7 @@ namespace drugmanagementsystproject.dal
         }
         private void connectionManager()
         {
-            if(con.State == ConnectionState.Open)
+            if (con.State == ConnectionState.Open)
             {
                 con.Close();
             }
@@ -27,15 +27,13 @@ namespace drugmanagementsystproject.dal
             }
         }
 
-        SqlCommand cmd;
-        SqlDataAdapter sda;
-        DataTable dt;
+
         public bool insertEmployee(EmployeeRegistrationModel employee)
         {
             connection();
-            cmd = new SqlCommand("AddEmployee", con);
+            SqlCommand cmd = new SqlCommand("AddEmployee", con);
             cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.AddWithValue("@employeeid", employee.employeeid);
+            //cmd.Parameters.AddWithValue("@employeeid", employee.employeeid);
             cmd.Parameters.AddWithValue("@employeename", employee.employeename);
             cmd.Parameters.AddWithValue("@dob", employee.dob);
             cmd.Parameters.AddWithValue("@phonenumber", employee.phonenumber);
@@ -46,10 +44,11 @@ namespace drugmanagementsystproject.dal
             cmd.Parameters.AddWithValue("@username", employee.username);
             cmd.Parameters.AddWithValue("@password", employee.password);
             cmd.Parameters.AddWithValue("@confirmpassword", employee.confirmpassword);
+            cmd.Parameters.AddWithValue("@Employee", employee.Employee);
             connectionManager();
             int r = cmd.ExecuteNonQuery();
             connectionManager();
-            if(r>0)
+            if (r > 0)
             {
                 return true;
             }
@@ -58,6 +57,8 @@ namespace drugmanagementsystproject.dal
                 return false;
             }
         }
+
+
         public List<EmployeeRegistrationModel> getAllEmployees()
         {
             connection();
@@ -85,8 +86,9 @@ namespace drugmanagementsystproject.dal
                     department = Convert.ToString(dr["department"]),
                     designation = Convert.ToString(dr["designation"]),
                     username = Convert.ToString(dr["username"]),
-                    password=Convert.ToString(dr["password"]),
-                    confirmpassword=Convert.ToString(dr["confirmpassword"])
+                    password = Convert.ToString(dr["password"]),
+                    confirmpassword = Convert.ToString(dr["confirmpassword"]),
+                    Employee = Convert.ToBoolean(dr["Employee"])
 
                 });
             }
@@ -110,10 +112,11 @@ namespace drugmanagementsystproject.dal
             cmd.Parameters.AddWithValue("@username", employee.username);
             cmd.Parameters.AddWithValue("@password", employee.password);
             cmd.Parameters.AddWithValue("@confirmpassword", employee.confirmpassword);
+            //cmd.Parameters.AddWithValue("@Employee", employee.Employee);
             connectionManager();
             int i = cmd.ExecuteNonQuery();
             connectionManager();
-            if(i>=1)
+            if (i >= 1)
             {
                 return true;
             }
@@ -124,23 +127,23 @@ namespace drugmanagementsystproject.dal
         }
         public bool deleteEmployee(int employeeid)
         {
-                connection();
-                cmd = new SqlCommand("DeleteEmployee", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@employeeid", employeeid);
-                connectionManager();
-                int r = cmd.ExecuteNonQuery();
-                connectionManager();
-                if (r > 0)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+            connection();
+            SqlCommand cmd = new SqlCommand("DeleteEmployee", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@employeeid", employeeid);
+            connectionManager();
+            int r = cmd.ExecuteNonQuery();
+            connectionManager();
+            if (r > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        
+
         public EmployeeRegistrationModel getEmployeeById(int employeeid)
         {
             connection();
@@ -167,6 +170,7 @@ namespace drugmanagementsystproject.dal
                 employee.username = Convert.ToString(dt.Rows[0]["username"]);
                 employee.password = Convert.ToString(dt.Rows[0]["password"]);
                 employee.confirmpassword = Convert.ToString(dt.Rows[0]["confirmpassword"]);
+                // employee.Employee = Convert.ToBoolean(dt.Rows[0]["Employee"]);
 
                 dt.Dispose();
                 return employee;
@@ -178,7 +182,7 @@ namespace drugmanagementsystproject.dal
         {
             connection();
             EmployeeRegistrationModel employee = new EmployeeRegistrationModel();
-            SqlCommand cmd = new SqlCommand("GetSingleUserDetails",con);
+            SqlCommand cmd = new SqlCommand("GetSingleUserDetails", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@emailid", emailid);
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
@@ -199,11 +203,93 @@ namespace drugmanagementsystproject.dal
                 employee.username = Convert.ToString(dt.Rows[0]["username"]);
                 employee.password = Convert.ToString(dt.Rows[0]["password"]);
                 employee.confirmpassword = Convert.ToString(dt.Rows[0]["confirmpassword"]);
+                employee.Employee = Convert.ToBoolean(dt.Rows[0]["Employee"]);
                 dt.Dispose();
                 return employee;
             }
             dt.Dispose();
             return null;
         }
+
+        public EmployeeRegistrationModel GetEmployeeByResetPasswordCode(string code)
+        {
+            connection();
+            EmployeeRegistrationModel employee = new EmployeeRegistrationModel();
+
+            SqlCommand cmd = new SqlCommand("GetEmployeeByResetPasswordCode", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            cmd.Parameters.AddWithValue("@resetcode", code);
+
+            DataTable dt = new DataTable();
+            connectionManager();
+            sd.Fill(dt);
+            connectionManager();
+            if (dt.Rows.Count != 0)
+            {
+
+                employee.employeeid = Convert.ToInt32(dt.Rows[0]["employeeid"]);
+                employee.employeename = Convert.ToString(dt.Rows[0]["employeename"]);
+                employee.dob = Convert.ToDateTime(dt.Rows[0]["dob"]);
+                employee.phonenumber = Convert.ToString(dt.Rows[0]["phonenumber"]);
+                employee.emailid = Convert.ToString(dt.Rows[0]["emailid"]);
+                employee.gender = Convert.ToString(dt.Rows[0]["gender"]);
+                employee.department = Convert.ToString(dt.Rows[0]["department"]);
+                employee.designation = Convert.ToString(dt.Rows[0]["designation"]);
+                employee.username = Convert.ToString(dt.Rows[0]["username"]);
+                employee.password = Convert.ToString(dt.Rows[0]["password"]);
+                employee.confirmpassword = Convert.ToString(dt.Rows[0]["confirmpassword"]);
+                employee.Employee = Convert.ToBoolean(dt.Rows[0]["Employee"]);
+
+                dt.Dispose();
+                return employee;
+            }
+            dt.Dispose();
+            return null;
+
+        }
+
+
+        public bool AddResetPasswordCode(string resetcode, int employeeid)
+        {
+            connection();
+            SqlCommand cmd = new SqlCommand("AddResetPasswordCode", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@resetcode", resetcode);
+            cmd.Parameters.AddWithValue("@employeeid", employeeid);
+
+            connectionManager();
+            int i = cmd.ExecuteNonQuery();
+            connectionManager();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
+        }
+
+
+        public bool UpdatePassword(string password, int employeeid)
+        {
+            connection();
+            SqlCommand cmd = new SqlCommand("UpdatePassword", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Password", password);
+            cmd.Parameters.AddWithValue("@employeeid", employeeid);
+
+            connectionManager();
+            int i = cmd.ExecuteNonQuery();
+            connectionManager();
+
+            if (i >= 1)
+                return true;
+            else
+                return false;
+        }
+
     }
-    }
+}

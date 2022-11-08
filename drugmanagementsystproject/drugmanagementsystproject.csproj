@@ -133,10 +133,12 @@
     <Compile Include="Models\AllergicInformationModel.cs" />
     <Compile Include="Models\DrugInformationModel.cs" />
     <Compile Include="Models\DrugTrailHistoryModel.cs" />
-    <Compile Include="Models\DrugTrailInfoModel.cs" />
     <Compile Include="Models\EmployeeRegistrationModel.cs" />
+    <Compile Include="Models\Forgotpassword.cs" />
     <Compile Include="Models\IndivisualTrailsInfoModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ResetPasswordModel.cs" />
+    <Compile Include="Models\UserRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -161,8 +163,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\EmployeeRegistration\Index.cshtml" />
-    <Content Include="Views\EmployeeRegistration\Create.cshtml" />
-    <Content Include="Views\EmployeeRegistration\Edit.cshtml" />
     <Content Include="Views\EmployeeRegistration\Details.cshtml" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
@@ -178,22 +178,25 @@
     <Content Include="Views\DrugTrailHist\Index.cshtml" />
     <Content Include="Views\DrugTrailHist\Details.cshtml" />
     <Content Include="Views\DrugTrailHist\Create.cshtml" />
-    <Content Include="Views\DrugTrailHist\Edit.cshtml" />
     <Content Include="Views\DrugTrailHist\Delete.cshtml" />
+    <Content Include="Views\Loginpage\Login.cshtml" />
+    <Content Include="Views\DrugInformation\delete.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Dashboard.cshtml" />
+    <Content Include="Views\AllergyInfo\Index.cshtml" />
+    <Content Include="Views\AllergyInfo\Details.cshtml" />
+    <Content Include="Views\AllergyInfo\Create.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Edit.cshtml" />
     <Content Include="Views\IndivisualTrailsInfo\Index.cshtml" />
     <Content Include="Views\IndivisualTrailsInfo\Details.cshtml" />
     <Content Include="Views\IndivisualTrailsInfo\Create.cshtml" />
     <Content Include="Views\IndivisualTrailsInfo\Edit.cshtml" />
     <Content Include="Views\IndivisualTrailsInfo\Delete.cshtml" />
-    <Content Include="Views\Loginpage\Login.cshtml" />
-    <Content Include="Views\DrugInformation\delete.cshtml" />
-    <Content Include="Views\Loginpage\ForgotPassword.cshtml" />
-    <Content Include="Views\EmployeeRegistration\Dashboard.cshtml" />
+    <Content Include="Views\AllergyInfo\Delete.cshtml" />
+    <Content Include="Views\EmployeeRegistration\Create.cshtml" />
+    <Content Include="Views\DrugTrailHist\Edit.cshtml" />
     <Content Include="Views\AllergyInfo\Edit.cshtml" />
-    <Content Include="Views\AllergyInfo\delete.cshtml" />
-    <Content Include="Views\AllergyInfo\Create.cshtml" />
-    <Content Include="Views\AllergyInfo\Details.cshtml" />
-    <Content Include="Views\AllergyInfo\Index.cshtml" />
+    <Content Include="Views\Loginpage\ForgotPassword.cshtml" />
+    <Content Include="Views\Loginpage\ResetPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

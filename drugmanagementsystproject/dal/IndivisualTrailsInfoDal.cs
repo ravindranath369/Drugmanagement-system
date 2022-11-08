@@ -26,9 +26,7 @@ namespace drugmanagementsystproject.dal
                 con.Open();
             }
         }
-        SqlCommand cmd;
-        SqlDataAdapter sda;
-        DataTable dt;
+        
 
         public bool insertIndtrailInfo(IndivisualTrailsInfoModel dth)
         {
@@ -36,7 +34,7 @@ namespace drugmanagementsystproject.dal
             connection();
             try
             {
-                cmd = new SqlCommand("AddIndivTrailInfo", con);
+                SqlCommand cmd = new SqlCommand("AddIndivTrailInfo", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@indivisualid", dth.indivisualid);
@@ -44,6 +42,8 @@ namespace drugmanagementsystproject.dal
                 cmd.Parameters.AddWithValue("@indivisualadress", dth.indivisualadress);
                 cmd.Parameters.AddWithValue("@phonennumber", dth.phonennumber);
                 cmd.Parameters.AddWithValue("@emergencycontactnumber", dth.emergencycontactnumber);
+                cmd.Parameters.AddWithValue("@Emailid", dth.Emailid);
+                cmd.Parameters.AddWithValue("@password", dth.password);
                 connectionManager();
                 int r = cmd.ExecuteNonQuery();
                 connectionManager();
@@ -65,7 +65,7 @@ namespace drugmanagementsystproject.dal
         {
             connection();
             List<IndivisualTrailsInfoModel> drugList = new List<IndivisualTrailsInfoModel>();
-            SqlCommand cmd = new SqlCommand("GetIndTrailInfo", con);
+            SqlCommand cmd = new SqlCommand("GetIndiTraiInfo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             SqlDataAdapter sd = new SqlDataAdapter(cmd);
             DataTable dt = new DataTable();
@@ -83,7 +83,9 @@ namespace drugmanagementsystproject.dal
                     indivisualadress = Convert.ToString(dr["indivisualadress"]),
                     phonennumber = Convert.ToString(dr["phonennumber"]),
                     emergencycontactnumber = Convert.ToString(dr["emergencycontactnumber"]),
-                    id = Convert.ToInt32(dr["id"])
+                    id = Convert.ToInt32(dr["id"]),
+                    Emailid = Convert.ToString(dr["Emailid"]),
+                    password = Convert.ToString(dr["password"])
                 });
             }
             dt.Dispose();
@@ -122,6 +124,8 @@ namespace drugmanagementsystproject.dal
                 Indivsual.indivisualadress = Convert.ToString(dt.Rows[0]["indivisualadress"]);
                 Indivsual.phonennumber = Convert.ToString(dt.Rows[0]["phonennumber"]);
                 Indivsual.emergencycontactnumber = Convert.ToString(dt.Rows[0]["emergencycontactnumber"]);
+                Indivsual.Emailid = Convert.ToString(dt.Rows[0]["Emailid"]);
+                Indivsual.password = Convert.ToString(dt.Rows[0]["password"]);
                 dt.Dispose();
                 return Indivsual;
             }
@@ -139,7 +143,8 @@ namespace drugmanagementsystproject.dal
             cmd.Parameters.AddWithValue("@indivisualadress", iti.indivisualadress);
             cmd.Parameters.AddWithValue("@phonennumber", iti.phonennumber);
             cmd.Parameters.AddWithValue("@emergencycontactnumber", iti.emergencycontactnumber);
-            
+            cmd.Parameters.AddWithValue("@Emailid", iti.Emailid);
+            cmd.Parameters.AddWithValue("@password", iti.password);
             connectionManager();
             int i = cmd.ExecuteNonQuery();
             connectionManager();
@@ -155,7 +160,7 @@ namespace drugmanagementsystproject.dal
         public bool deleteIndiTrailInfo(int id)
         {
             connection();
-            cmd = new SqlCommand("DeleteIndiTrailInfo", con);
+            SqlCommand cmd = new SqlCommand("DeleteIndiTrailInfo", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.AddWithValue("@id", id);
             connectionManager();
@@ -169,6 +174,34 @@ namespace drugmanagementsystproject.dal
             {
                 return false;
             }
+        }
+        public IndivisualTrailsInfoModel GetindividualEmaildetail(string Emailid)
+        {
+            connection();
+            IndivisualTrailsInfoModel Ind = new IndivisualTrailsInfoModel();
+            SqlCommand cmd = new SqlCommand("GetIndividualEmailDetail", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@Emailid", Emailid);
+            SqlDataAdapter sd = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            connectionManager();
+            sd.Fill(dt);
+            connectionManager();
+            if (dt.Rows.Count != 0)
+            {
+                Ind.indivisualid = Convert.ToString(dt.Rows[0]["indivisualid"]);
+                Ind.indivisualname = Convert.ToString(dt.Rows[0]["indivisualname"]);
+                Ind.indivisualadress = Convert.ToString(dt.Rows[0]["indivisualadress"]);
+                Ind.phonennumber = Convert.ToString(dt.Rows[0]["phonennumber"]);
+                Ind.emergencycontactnumber = Convert.ToString(dt.Rows[0]["emergencycontactnumber"]);
+                Ind.id = Convert.ToInt32(dt.Rows[0]["id"]);
+                Ind.Emailid = Convert.ToString(dt.Rows[0]["Emailid"]);
+                Ind.password = Convert.ToString(dt.Rows[0]["password"]);
+                dt.Dispose();
+                return Ind;
+            }
+            dt.Dispose();
+            return null;
         }
     }
 }

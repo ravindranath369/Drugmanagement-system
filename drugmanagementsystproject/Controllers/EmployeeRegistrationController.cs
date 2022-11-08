@@ -18,6 +18,7 @@ namespace drugmanagementsystproject.Controllers
             return View();
         }
         // GET: EmployeeRegistration
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Index()
         {
             List<EmployeeRegistrationModel> l1 = db.getAllEmployees();
@@ -25,6 +26,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         // GET: EmployeeRegistration/Details/5
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Details(int employeeid)
         {
             var model = db.getEmployeeById(employeeid);
@@ -32,6 +34,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         // GET: EmployeeRegistration/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             return View();
@@ -39,10 +42,12 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: EmployeeRegistration/Create
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public ActionResult Create(EmployeeRegistrationModel employee)
         {
             try
             {
+                
                 // TODO: Add insert logic here
                 if(ModelState.IsValid)
                 {
@@ -52,7 +57,7 @@ namespace drugmanagementsystproject.Controllers
                         return RedirectToAction("Index");
                     }
                 }
-                return View();
+                return View(employee);
             }
             catch (Exception ex)
             {
@@ -62,6 +67,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         // GET: EmployeeRegistration/Edit/5
+        [Authorize(Roles ="Admin")]
         public ActionResult Edit(int employeeid)
         {
             EmployeeRegistrationModel em = db.getEmployeeById(employeeid);
@@ -70,6 +76,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: EmployeeRegistration/Edit/5
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(EmployeeRegistrationModel emp)
         {
             try
@@ -95,6 +102,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         // GET: EmployeeRegistration/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int employeeid)
         {
             EmployeeRegistrationModel e = db.getEmployeeById(employeeid);
@@ -103,6 +111,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: EmployeeRegistration/Delete/5
         [HttpPost]
+        [Authorize(Roles ="Admin")]
         public ActionResult Delete(EmployeeRegistrationModel emp)
         {
             try
@@ -113,7 +122,7 @@ namespace drugmanagementsystproject.Controllers
                     TempData["message"] = "Sucessfully deleted";
                     // TempData["message"] = "<script>alert('Deleted SUCCESSFULLY')</script>";
                 }
-                return RedirectToAction("Edit");
+                return RedirectToAction("Index");
             }
             catch(Exception e)
             {

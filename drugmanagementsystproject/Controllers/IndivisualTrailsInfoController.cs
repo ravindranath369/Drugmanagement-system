@@ -11,12 +11,14 @@ namespace drugmanagementsystproject.Controllers
     {
         IndivisualTrailsInfoDal db = new IndivisualTrailsInfoDal();
         // GET: IndivisualTrailsInfo
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Index()
         {
             List<IndivisualTrailsInfoModel> l1 = db.getInditrailsinfo();
             return View(l1);
         }
 
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Details(int id)
         {
             var model = db.getIndivTrailbyid(id);
@@ -24,6 +26,7 @@ namespace drugmanagementsystproject.Controllers
         }
 
         // GET: /Create
+        //[Authorize(Roles = "Admin,User")]
         public ActionResult Create()
         {
             return View();
@@ -31,6 +34,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: EmployeeRegistration/Create
         [HttpPost]
+        //[Authorize(Roles = "Admin,User")]
         public ActionResult Create(IndivisualTrailsInfoModel dth)
         {
             try
@@ -52,6 +56,7 @@ namespace drugmanagementsystproject.Controllers
                 return View(dth);
             }
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(int id)
         {
             IndivisualTrailsInfoModel em = db.getIndivTrailbyid(id);
@@ -60,6 +65,7 @@ namespace drugmanagementsystproject.Controllers
 
         // POST: 
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Edit(IndivisualTrailsInfoModel dth)
         {
             try
@@ -83,6 +89,7 @@ namespace drugmanagementsystproject.Controllers
                 return View(dth);
             }
         }
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Delete(int id)
         {
             IndivisualTrailsInfoModel d = db.getIndivTrailbyid(id);
@@ -90,6 +97,7 @@ namespace drugmanagementsystproject.Controllers
         }
         // POST: 
         [HttpPost]
+        [Authorize(Roles = "Admin,User")]
         public ActionResult Delete(IndivisualTrailsInfoModel itm)
         {
             try
