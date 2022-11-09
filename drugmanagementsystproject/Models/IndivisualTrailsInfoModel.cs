@@ -15,7 +15,7 @@ namespace drugmanagementsystproject.Models
         [Display(Name = "individual name")]
         [RegularExpression(@"[a-zA-Z]{3,20}", ErrorMessage = "name should contain minimum of 3 letters")]
         public string indivisualname { get; set; }
-        [Required(ErrorMessage = "please enter indivisual adress")]
+        [Required(ErrorMessage = "please enter individual adress")]
         [Display(Name = "individual adress")]
         public string indivisualadress { get; set; }
         [Required(ErrorMessage = "please enter phone number")]
